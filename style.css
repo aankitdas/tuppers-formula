@@ -19,6 +19,47 @@ hr {
   margin: 30px 0;
 }
 
+.info-box {
+  border: .2px solid #000000;  /* black border for light mode */
+  border-radius: 8px;
+  padding: 15px 20px;
+  max-width: 700px;
+  margin: 20px auto;           /* centers the box */
+  background-color: #f9f9f9;   /* subtle off-white background */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #000000;              /* text dark for readability */
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.site-header .logo {
+  width: 50px;       /* adjust as needed */
+  height: 50px;
+}
+
+.site-header h1 {
+  font-size: 2rem;
+  color: #000000;    /* dark text for light mode */
+  margin: 0;
+}
+
+.site-description {
+  text-align: center;
+  color: #333333;    /* standard dark gray for readability */
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+
 /* ===== Button Styling ===== */
 button {
   background-color: #4a90e2;
