@@ -15,48 +15,63 @@
 
   <hr>
 
-  <!-- DRAWING SECTION -->
+  <!-- INPUT MODE TOGGLE -->
   <h2>1️⃣ Input Mode</h2>
-<button id="drawModeBtn">Draw</button>
-<button id="textModeBtn">Text</button>
+  <div class="button-group">
+    <button id="drawModeBtn" class="active">Draw</button>
+    <button id="textModeBtn">Text</button>
+  </div>
 
-<div id="drawSection">
-  <p>Draw on the canvas below (106×17 grid). Click "Generate k" to see the k value encoding your pattern.</p>
-  <canvas id="drawingCanvas" width="530" height="85"></canvas>
-  <br>
-  <button id="clearBtn">Clear Drawing</button>
-  <button id="generateKBtn">Generate k from Drawing</button>
-  <h3>k value from drawing:</h3>
-  <textarea id="kOutput" rows="3" cols="80" readonly></textarea>
-</div>
+  <!-- DRAW SECTION -->
+  <div id="drawSection">
+    <p>Draw on the canvas below (106×17 grid). Click "Generate k" to see the k value encoding your pattern.</p>
+    <canvas id="drawingCanvas" width="530" height="85"></canvas>
+    <div class="button-group">
+      <button id="clearBtn">Clear Drawing</button>
+      <button id="generateKBtn">Generate k from Drawing</button>
+    </div>
+    <h3>k value from drawing:</h3>
+    <textarea id="kOutput" rows="3" cols="80" readonly></textarea>
+    <div class="button-group">
+        <button id="copyKBtn">Copy k</button>
+    </div>
+  </div>
 
-<div id="textSection" style="display:none;">
-  <p>Type text below and generate its pattern using Tupper's formula.</p>
-  <textarea id="textInput" rows="3" cols="80" placeholder="Enter text here"></textarea>
-  <br>
-  <button id="textToKBtn">Generate k from Text</button>
-  <h3>k value from text:</h3>
-  <textarea id="textKOutput" rows="3" cols="80" readonly></textarea>
-</div>
+  <!-- TEXT SECTION -->
+  <div id="textSection" style="display:none;">
+    <p>Type text below and generate its pattern using Tupper's formula.</p>
+    <textarea id="textInput" rows="3" cols="80" placeholder="Enter text here"></textarea>
+    <div class="button-group">
+      <button id="textToKBtn">Generate k from Text</button>
+    </div>
+    <h3>k value from text:</h3>
+    <textarea id="textKOutput" rows="3" cols="80" readonly></textarea>
+    <div class="button-group"><button id="copyTextKBtn">Copy k</button></div>
+  </div>
+
+  <hr>
 
   <!-- FORMULA GRAPH -->
   <h2>2️⃣ Plot any k value</h2>
   <p>Paste a k value from above to visualize the pattern.</p>
   <textarea id="plotKInput" rows="3" cols="80" placeholder="Paste k value here"></textarea>
-  <br>
-  <button id="plotKBtn">Plot k</button>
-  
+  <div class="button-group">
+    <button id="plotKBtn">Plot k</button>
+    <button id="clearGraphBtn">Clear Graph</button>
+  </div>
   <canvas id="formulaGraph" width="600" height="200"></canvas>
-  <button id="clearGraphBtn">Clear Graph</button>
+
+  <!-- FORMULA DISPLAY -->
   <div id="formulaContainer">
-  <h3>Tupper’s Formula:</h3>
-  <p id="latexFormula">
-    $$\frac{1}{2} < \left\lfloor \mod\left(\left\lfloor \frac{y}{17} \right\rfloor 2^{-17 \lfloor x \rfloor - \text{mod}(\lfloor y \rfloor,17)}, 2\right) \right\rfloor$$
-  </p>
-  <p>All patterns are plotted using <strong>Tupper’s self-referential formula</strong>. Learn more on 
-    <a href="https://en.wikipedia.org/wiki/Tupper%27s_self-referential_formula" target="_blank">Wikipedia</a>.
-  </p>
-</div>
+    <h3>Tupper’s Formula:</h3>
+    <p id="latexFormula">
+      $$\frac{1}{2} < \left\lfloor \mod\left(\left\lfloor \frac{y}{17} \right\rfloor 2^{-17 \lfloor x \rfloor - \text{mod}(\lfloor y \rfloor,17)}, 2\right) \right\rfloor$$
+    </p>
+    <p>All patterns are plotted using <strong>Tupper’s self-referential formula</strong>. Learn more on 
+      <a href="https://en.wikipedia.org/wiki/Tupper%27s_self-referential_formula" target="_blank">Wikipedia</a>.
+    </p>
+  </div>
+
 </body>
 <script src="script.js"></script>
 </html>
