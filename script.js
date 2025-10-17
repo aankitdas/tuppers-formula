@@ -26,6 +26,13 @@ const scale = 5; // for canvas drawing
 const canvas = document.getElementById("drawingCanvas");
 const ctx = canvas.getContext("2d");
 
+// // --- fix for high-DPI / mobile scaling ---
+// const dpr = window.devicePixelRatio || 1;
+// const rect = canvas.getBoundingClientRect();
+// canvas.width = rect.width * dpr;
+// canvas.height = rect.height * dpr;
+// ctx.scale(dpr, dpr);
+
 let grid = Array.from({ length: rowsGraph }, () => Array(colsGraph).fill(0));
 let drawing = false;
 
@@ -47,14 +54,21 @@ canvas.addEventListener("mouseup", () => drawing = false);
 canvas.addEventListener("mouseleave", () => drawing = false);
 canvas.addEventListener("mousemove", drawPixel);
 
-// Touch events for mobile
+// Touch events for mobile (with proper scaling)
 canvas.addEventListener("touchstart", (e) => {
   e.preventDefault();
   drawing = true;
+
   const touch = e.touches[0];
   const rect = canvas.getBoundingClientRect();
-  const x = Math.floor((touch.clientX - rect.left) / scale);
-  const y = Math.floor((touch.clientY - rect.top) / scale);
+
+  // Handle scaling correctly
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+
+  const x = Math.floor(((touch.clientX - rect.left) * scaleX) / scale);
+  const y = Math.floor(((touch.clientY - rect.top) * scaleY) / scale);
+
   if (x >= 0 && x < colsGraph && y >= 0 && y < rowsGraph) {
     grid[y][x] = 1;
     drawGrid();
@@ -64,18 +78,25 @@ canvas.addEventListener("touchstart", (e) => {
 canvas.addEventListener("touchmove", (e) => {
   e.preventDefault();
   if (!drawing) return;
+
   const touch = e.touches[0];
   const rect = canvas.getBoundingClientRect();
-  const x = Math.floor((touch.clientX - rect.left) / scale);
-  const y = Math.floor((touch.clientY - rect.top) / scale);
+
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+
+  const x = Math.floor(((touch.clientX - rect.left) * scaleX) / scale);
+  const y = Math.floor(((touch.clientY - rect.top) * scaleY) / scale);
+
   if (x >= 0 && x < colsGraph && y >= 0 && y < rowsGraph) {
     grid[y][x] = 1;
     drawGrid();
   }
 });
 
-canvas.addEventListener("touchend", () => drawing = false);
-canvas.addEventListener("touchcancel", () => drawing = false);
+canvas.addEventListener("touchend", () => (drawing = false));
+canvas.addEventListener("touchcancel", () => (drawing = false));
+
 
 
 function drawPixel(e) {
